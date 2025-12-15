@@ -10,7 +10,11 @@ public class CombatUnit : MonoBehaviour
 
     public void RecibirDano(int cantidad)
     {
-        if (defendiendo) cantidad /= 2;
+        if (defendiendo)
+        {
+         cantidad = Math.Max(cantidad / 2,1;
+         defendiendo = false;
+        }
         vida = Mathf.Max(vida - cantidad, 0);
     }
 
