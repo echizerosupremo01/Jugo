@@ -22,4 +22,13 @@ public class CombatUnit : MonoBehaviour
     {
         vida = Mathf.Min(vida + cantidad, vidaMaxima);
     }
+
+    public int CalcularDanocontra(CombatUnit objetivo)
+    {
+    float[]multiplicadores = {0.5f, 0.5f, 0.5f, 0.5f, 1f, 1f, 1.2f, 1.2f, 1.5f, 1.5f, 2f};
+    float multi= multiplicadores[Random.Range(0, multiplicadores.Lenght)];
+    int dano = Math.Max(Mathf.FloorToInt(ataque*multi) - objetivo.defensa, 1);
+    CombatManager.Instance.MostrarTexto(nombre + "hizo "multi.ToString("0,0")+" de daño.");
+    return dano;
+    }
 }
