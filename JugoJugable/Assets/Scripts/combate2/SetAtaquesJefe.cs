@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SetAtaquesJefe : MonoBehaviour {
     public CombatUnit jefe;
+    public CombatUnit[] jugadores;
+
+    int curacionesRestantes = 2;
+    int turnosDesdeUltimaCura = 99;
+    bool seCuroUltimoTurno = false;
 
     public IEnumerator AtaqueSimple(CombatUnit objetivo) {
         CombatManager.Instance.MostrarTexto(jefe.nombre + " ataca a " + objetivo.nombre);
@@ -17,5 +22,9 @@ public class SetAtaquesJefe : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         int cantidad = Mathf.FloorToInt(jefe.vidaMaxima * 0.12f);
         jefe.Curar(cantidad);
+
+        curacionesRestantes--;
+        seCuroUltimoTurno = true;
+        turnoDesdeUltimaCura = 0;
     }
 }
