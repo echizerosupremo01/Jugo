@@ -120,6 +120,7 @@ public class CombatManager : MonoBehaviour
             yield return set.Curarse();
         else
             yield return set.AtaqueSimple(objetivo);
+        set.FinTurnoJefe();
     }
 
     bool HayJugadoresVivos()
