@@ -30,7 +30,7 @@ public class SetAtaquesJefe : MonoBehaviour {
 
         curacionesRestantes--;
         seCuroUltimoTurno = true;
-        turnoDesdeUltimaCura = 0;
+        turnosDesdeUltimaCura = 0;
     }
 
     public void FinTurnoJefe()
