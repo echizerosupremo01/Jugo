@@ -13,18 +13,29 @@ public class SetAtaquesJefe : MonoBehaviour {
     public IEnumerator AtaqueSimple(CombatUnit objetivo) {
         CombatManager.Instance.MostrarTexto(jefe.nombre + " ataca a " + objetivo.nombre);
         yield return new WaitForSeconds(0.5f);
-        int dano = Mathf.Max(jefe.ataque - objetivo.defensa, 1);
+        
+        int dano = jefe.CalcularDanoContra(objetivo);
         objetivo.RecibirDano(dano);
     }
 
     public IEnumerator Curarse() {
+        if(curacionesRestantes <= 0 || seCuroUltimoTurno || turnosDesdeUltimaCura < 2)
+            yield break;
+        
         CombatManager.Instance.MostrarTexto(jefe.nombre + " se cura.");
         yield return new WaitForSeconds(0.5f);
+        
         int cantidad = Mathf.FloorToInt(jefe.vidaMaxima * 0.12f);
         jefe.Curar(cantidad);
 
         curacionesRestantes--;
         seCuroUltimoTurno = true;
         turnoDesdeUltimaCura = 0;
+    }
+
+    public void FinTurnoJefe()
+    {
+        turnosDesdeUltimaCura++;
+        seCuroUltimoTurno= false;
     }
 }
